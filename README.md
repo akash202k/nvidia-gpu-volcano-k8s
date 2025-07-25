@@ -27,5 +27,4 @@ The setup enables efficient orchestration of scalable ML batch pipelines, ensuri
 To showcase how a DevOps engineer can build and manage a cloud-native ML batch job pipeline with GPU acceleration on Kubernetes, demonstrating production best practices for scheduling, scaling, and cost optimization.
 
 ---
-
-Let me know if you want me to add sections for installation, usage, or architecture diagrams!
+- Akash Pawar
