@@ -1,5 +1,11 @@
 # NVIDIA GPU Volcano Kubernetes Batch Jobs
 
+## Architecture Diagram
+
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/94335330-0360-41aa-836a-8263d70cded6" />
+
+---
+
 ## Project Overview
 
 This project demonstrates a production-grade Proof-of-Concept (PoC) for running **GPU-accelerated machine learning batch jobs** on Kubernetes using:
