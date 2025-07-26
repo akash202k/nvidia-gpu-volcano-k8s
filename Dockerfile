@@ -1,9 +1,8 @@
-# Dockerfile
-FROM --platform=linux/amd64 python:3.10-slim
-
-RUN apt-get update && apt-get install -y \
-    gcc \
-    && pip install --no-cache-dir tensorflow==2.14
+FROM tensorflow/tensorflow:2.14.0-gpu
+RUN pip install boto3
+RUN apt-get remove -y curl wget git && \
+    apt-get clean && \
+    rm -rf /root/.cache /usr/local/cuda/doc/*
 
 WORKDIR /app
 COPY model/train.py .
