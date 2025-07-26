@@ -1,5 +1,14 @@
 # NVIDIA GPU Volcano Kubernetes Batch Jobs
 
+## ⚠️ COST WARNING: This demo uses 2x g4dn.xlarge GPU instances (~$0.53/hour each). Always delete node group after testing to avoid unexpected charges. Demo should complete in ~30 minutes for ~$0.32 total cost.
+
+💡 COST TIPS:
+
+Use spot instances for 60-70% savings
+Scale down to 0 nodes immediately after demo
+Set up billing alerts before running
+Delete resources promptly - GPU instances are expensive!
+
 ## Architecture Diagram
 
 <img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/94335330-0360-41aa-836a-8263d70cded6" />
