@@ -1,0 +1,113 @@
+{
+  "run_id": "65078d2b",
+  "job_type": "volcano_tensorflow_training",
+  "system_info": {
+    "timestamp": "2025-07-26T04:55:28.532882",
+    "hostname": "gang-tf-job-trainer-1",
+    "python_version": "2.14.0",
+    "cpu": {
+      "cores": 4,
+      "model": "Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz"
+    },
+    "memory": {
+      "total_mb": 15692,
+      "available_mb": 14606
+    }
+  },
+  "kubernetes_info": {
+    "pod_name": "gang-tf-job-trainer-1",
+    "node_name": "Unknown",
+    "namespace": "default",
+    "service_account": "Unknown",
+    "pod_ip": "Unknown"
+  },
+  "aws_metadata": {
+    "instance_id": "i-0edff736d5e7d3a59",
+    "instance_type": "g4dn.xlarge",
+    "availability_zone": "ap-southeast-1b",
+    "region": "ap-southeast-1",
+    "local_ipv4": "198.2.153.125",
+    "public_ipv4": "Unable to fetch"
+  },
+  "gpu_info": {
+    "tensorflow_version": "2.14.0",
+    "cuda_built": true,
+    "gpu_available": true,
+    "physical_devices": [
+      "PhysicalDevice(name='/physical_device:CPU:0', device_type='CPU')",
+      "PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')"
+    ],
+    "gpu_count": 1,
+    "gpu_details": [
+      {
+        "index": 0,
+        "device": "PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')",
+        "details": {
+          "compute_capability": [
+            7,
+            5
+          ],
+          "device_name": "Tesla T4"
+        }
+      }
+    ],
+    "nvidia_smi": [
+      {
+        "name": "Tesla T4",
+        "memory_total_mb": "15360",
+        "memory_used_mb": "103",
+        "utilization_percent": "9",
+        "temperature_c": "30"
+      }
+    ]
+  },
+  "resource_limits": {
+    "cpu_limit_cores": 2.0,
+    "memory_limit_mb": 4096
+  },
+  "training_results": {
+    "status": "success",
+    "start_time": "2025-07-26T04:55:28.747951",
+    "dataset": {
+      "samples": 10000,
+      "features": 10,
+      "target_shape": 1
+    },
+    "model": {
+      "layers": [
+        {
+          "type": "Dense",
+          "units": 64,
+          "activation": "relu"
+        },
+        {
+          "type": "Dense",
+          "units": 64,
+          "activation": "relu"
+        },
+        {
+          "type": "Dense",
+          "units": 1,
+          "activation": "linear"
+        }
+      ]
+    },
+    "training_config": {
+      "optimizer": "adam",
+      "loss": "mse",
+      "epochs": 5,
+      "batch_size": 64
+    },
+    "device_used": "/GPU:0",
+    "end_time": "2025-07-26T04:55:32.314019",
+    "final_loss": 0.08474162966012955,
+    "loss_history": [
+      0.09428024291992188,
+      0.08656451851129532,
+      0.08581078797578812,
+      0.08532044291496277,
+      0.08474162966012955
+    ],
+    "total_epochs_completed": 5
+  }
+}
