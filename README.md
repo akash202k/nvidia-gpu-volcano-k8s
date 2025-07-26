@@ -8,29 +8,63 @@
 
 ## Project Overview
 
-This project demonstrates a production-grade Proof-of-Concept (PoC) for running **GPU-accelerated machine learning batch jobs** on Kubernetes using:
 
-* **Volcano** (version 1.12.1 via Helm chart) for advanced batch scheduling and gang scheduling capabilities
-* **Karpenter** for dynamic provisioning and autoscaling of NVIDIA GPU nodes
-* **AWS EKS** as the Kubernetes platform leveraging cost-effective GPU instance types (e.g., `g4dn.xlarge`)
-* **TensorFlow GPU containers** for ML model training workloads
+Minimal demo to showcase **gang scheduling** using [Volcano](https://volcano.sh/en/) on Kubernetes. Runs a lightweight TensorFlow job that requires multiple pods to start together.
 
-The setup enables efficient orchestration of scalable ML batch pipelines, ensuring resource optimization, workload reliability, and cost-effectiveness.
+## ✅ Features
 
----
+* Gang scheduling with `minAvailable: 2`
+* Runs on a single `g4dn.xlarge` GPU instance
+* Simulates resource contention to demonstrate blocking
+* Cross-platform Docker build (Mac M1 → Linux AMD64)
+* Complete run under 15 minutes and \~\$0.05 (spot instance)
 
-## Key Concepts
+## 📁 Structure
 
-* **Gang Scheduling:** Volcano schedules pods as a group, ensuring all required pods start together or none at all, which is crucial for distributed ML workloads.
-* **Dynamic GPU Node Provisioning:** Karpenter automatically scales GPU-enabled nodes up and down based on workload demand, reducing idle costs.
-* **Resource Isolation:** GPU nodes are tainted and tolerations are used to ensure GPU workloads run only on appropriate nodes.
-* **Batch Job Reliability:** Volcano handles retries, priorities, and queue management to improve batch job success rates.
+```
+.
+├── Dockerfile
+├── model/
+│   └── train.py
+├── manifests/
+│   ├── gpu-node-label-taint.sh
+│   ├── tensorflow-job.yaml
+│   ├── volcano-queue.yaml
+│   └── blocker-pod.yaml
+└── README.md
+```
 
----
+## 🚀 Run Demo
 
-## Project Aim
+```bash
+# 1. Label and taint GPU node
+chmod +x manifests/gpu-node-label-taint.sh
+./manifests/gpu-node-label-taint.sh
 
-To showcase how a DevOps engineer can build and manage a cloud-native ML batch job pipeline with GPU acceleration on Kubernetes, demonstrating production best practices for scheduling, scaling, and cost optimization.
+# 2. Create Volcano queue
+kubectl apply -f manifests/volcano-queue.yaml
 
----
-- Akash Pawar
+# 3. Simulate GPU contention
+kubectl apply -f manifests/blocker-pod.yaml
+
+# 4. Deploy gang scheduled job
+kubectl apply -f manifests/tensorflow-job.yaml
+
+# 5. Watch pods (should stay Pending)
+kubectl get pods -w
+
+# 6. Delete blocker to allow gang job to run
+kubectl delete pod blocker
+```
+
+## 🧹 Cleanup
+
+```bash
+kubectl delete -f manifests/
+docker rmi tf-volcano-demo
+```
+
+## 💰 Cost Tips
+
+* Use `g4dn.xlarge` **spot instance**
+* Total cost: **<\$0.05** (runtime \~15 mins)

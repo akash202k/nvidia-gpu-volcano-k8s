@@ -1,0 +1,6 @@
+apiVersion: scheduling.volcano.sh/v1beta1
+kind: Queue
+metadata:
+  name: ml-queue
+spec:
+  weight: 1
